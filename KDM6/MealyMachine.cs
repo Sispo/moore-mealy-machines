@@ -9,18 +9,21 @@ namespace KDM
 {
     class MealyMachine: Machine, IMachine
     {
-
-        public MealyMachine(Machine machine)
+        public MealyMachine(Machine machine) : base(machine.inputAlphabet,machine.outputAlphabet,machine.inputMatrix,machine.outputMatrix)
         {
-            if (machine.inputAlphabet.Count != machine.inputMatrix[0].Count || machine.inputAlphabet.Count != machine.outputMatrix[0].Count)
+            CheckFormat();
+        }
+        public MealyMachine(string fileName) : base(fileName)
+        {
+            CheckFormat();
+        }
+
+        private void CheckFormat()
+        {
+            if (inputAlphabet.Count != inputMatrix[0].Count || inputAlphabet.Count != outputMatrix[0].Count)
             {
                 throw new Exception("Wrong machine format");
             }
-
-            inputAlphabet = machine.inputAlphabet;
-            outputAlphabet = machine.outputAlphabet;
-            inputMatrix = machine.inputMatrix;
-            outputMatrix = machine.outputMatrix;
         }
 
         public string Run(string[] inputString)

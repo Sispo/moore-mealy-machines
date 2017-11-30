@@ -9,18 +9,21 @@ namespace KDM
 {
     public class MooreMachine: Machine
     {
-
-        public MooreMachine(Machine machine)
+        public MooreMachine(Machine machine) : base(machine.inputAlphabet,machine.outputAlphabet,machine.inputMatrix,machine.outputMatrix)
         {
-            if (machine.inputAlphabet.Count != machine.inputMatrix[0].Count || machine.outputMatrix[0].Count != 1)
+            CheckFormat();
+        }
+        public MooreMachine(string fileName) : base(fileName)
+        {
+            CheckFormat();
+        }
+
+        private void CheckFormat()
+        {
+            if (inputAlphabet.Count != inputMatrix[0].Count || outputMatrix[0].Count != 1)
             {
                 throw new Exception("Wrong machine format");
             }
-
-            inputAlphabet = machine.inputAlphabet;
-            outputAlphabet = machine.outputAlphabet;
-            inputMatrix = machine.inputMatrix;
-            outputMatrix = machine.outputMatrix;
         }
         public string Run(string[] inputString)
         {

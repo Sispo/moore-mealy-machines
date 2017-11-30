@@ -1,0 +1,7 @@
+yab bay bxz by
+x y
+1 1 4 1!x y y x
+0 1 1 1!y x x x
+4 2 4 1!y x x x
+0 2 3 1!y x x x
+3 1 0 1!x y x y

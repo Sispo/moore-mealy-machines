@@ -164,7 +164,7 @@ namespace KDM
             return base.ToString();
         }
 
-        public Machine Minimize(Machine machine)
+        public void Minimize()
         {
             List<List<List<int>>> equivalenceLevels = new List<List<List<int>>>();
             List<List<int>> classes = new List<List<int>>();
@@ -254,8 +254,8 @@ namespace KDM
                 newOutputMatrix.Add(outputMatrix[classes[i][0]]);
             }
 
-
-            return new Machine(inputAlphabet, outputAlphabet, newInputMatrix, newOutputMatrix);
+            inputMatrix = newInputMatrix;
+            outputMatrix = newOutputMatrix;
         }
 
         public List<List<int>> GetCopy(List<List<int>> cl)
