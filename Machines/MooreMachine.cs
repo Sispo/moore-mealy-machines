@@ -5,15 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace KDM
+namespace Machines
 {
     public class MooreMachine: Machine
     {
         public MooreMachine(Machine machine) : base(machine.inputAlphabet,machine.outputAlphabet,machine.inputMatrix,machine.outputMatrix)
-        {
-            CheckFormat();
-        }
-        public MooreMachine(string fileName) : base(fileName)
         {
             CheckFormat();
         }

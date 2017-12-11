@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KDM
+namespace Machines
 {
     public interface IMachine
     {

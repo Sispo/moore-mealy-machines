@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="IMachine.cs" />
     <Compile Include="Machine.cs" />
+    <Compile Include="MachineFileReader.cs" />
     <Compile Include="MealyMachine.cs" />
     <Compile Include="MooreMachine.cs" />
     <Compile Include="Program.cs" />

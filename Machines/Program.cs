@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Machines;
 
-namespace KDM
+namespace Example
 {
     class Program
     {
@@ -49,7 +50,7 @@ namespace KDM
                         break;
                 }
 
-                Machine machine = isMachineMealy ? (Machine)new MealyMachine(fileName) : (Machine)new MooreMachine(fileName);
+                Machine machine = MachineFileReader.ReadMachineFromFile(fileName);
 
                 machine.Show();
 
@@ -60,16 +61,7 @@ namespace KDM
                     machine.Show();
                 }
 
-                if (isMachineMealy)
-                {
-                    MealyMachine mm = (MealyMachine)machine;
-                    ShowResult(mm.Run(mm.Split(GetString())));
-                }
-                else
-                {
-                    MooreMachine mm = (MooreMachine)machine;
-                    ShowResult(mm.Run(mm.Split(GetString())));
-                }
+                RunMachine(isMachineMealy, machine);
 
             } else
             {
@@ -78,7 +70,7 @@ namespace KDM
                 Console.Write("\nEnter filename: ");
                 string fileName = Console.ReadLine();
 
-                Machine machine = new Machine(fileName);
+                Machine machine = MachineFileReader.ReadMachineFromFile(fileName);
                 machine.Show();
 
                 Console.Write("\nDo you want to minimize the machine ? (y/n): ");
@@ -90,19 +82,23 @@ namespace KDM
                     machine.Show();
                 }
 
-                if (isMachineMealy)
-                {
-                    MealyMachine mm = new MealyMachine(machine);
-                    ShowResult(mm.Run(mm.Split(GetString())));
-                }
-                else
-                {
-                    MooreMachine mm = new MooreMachine(machine);
-                    ShowResult(mm.Run(mm.Split(GetString())));
-                }
+                RunMachine(isMachineMealy, machine);
             }
         }
 
+        public static void RunMachine(bool isMachineMealy, Machine machine)
+        {
+            if (isMachineMealy)
+            {
+                var mealyMachine = new MealyMachine(machine);
+                ShowResult(mealyMachine.Run(mealyMachine.Split(GetString())));
+            }
+            else
+            {
+                var mooreMachine = new MooreMachine(machine);
+                ShowResult(mooreMachine.Run(mooreMachine.Split(GetString())));
+            }
+        }
         public static string GetString()
         {
             Console.Write("\nEnter string: ");

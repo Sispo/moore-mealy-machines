@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
-namespace KDM
+namespace Machines
 {
     class MealyMachine: Machine, IMachine
     {
         public MealyMachine(Machine machine) : base(machine.inputAlphabet,machine.outputAlphabet,machine.inputMatrix,machine.outputMatrix)
-        {
-            CheckFormat();
-        }
-        public MealyMachine(string fileName) : base(fileName)
         {
             CheckFormat();
         }

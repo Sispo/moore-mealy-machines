@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace KDM
+namespace Machines
 {
     public class Machine
     {
@@ -32,62 +32,6 @@ namespace KDM
             outputAlphabet = outputAlpha;
             inputMatrix = inputM;
             outputMatrix = outputM;
-        }
-
-        public Machine(string fileName)
-        {
-            initLists();
-
-            using (StreamReader sr = new StreamReader(fileName))
-            {
-                inputAlphabet.AddRange(sr.ReadLine().Split(' '));
-                outputAlphabet.AddRange(sr.ReadLine().Split(' '));
-
-                int previousInputCount = 0;
-                int previousOutputCount = 0;
-
-                while (!sr.EndOfStream)
-                {
-                    string[] str = sr.ReadLine().Split('!');
-                    List<int> buffer = new List<int>();
-                    int count = 0;
-                    foreach (string s in str[0].Split(' '))
-                    {
-                        count++;
-                        buffer.Add(Int32.Parse(s));
-                    }
-
-                    if (previousInputCount != 0 && previousInputCount != count)
-                    {
-                        throw new Exception("Wrong machine format");
-                    } else if (previousInputCount == 0)
-                    {
-                        previousInputCount = count;
-                    }
-
-                    inputMatrix.Add(buffer);
-
-                    buffer = new List<int>();
-                    count = 0;
-
-                    foreach (string s in str[1].Split(' '))
-                    {
-                        count++;
-                        buffer.Add(outputAlphabet.FindIndex(x => x == s));
-                    }
-
-                    if (previousOutputCount != 0 && previousOutputCount != count)
-                    {
-                        throw new Exception("Wrong machine format");
-                    }
-                    else if (previousOutputCount == 0)
-                    {
-                        previousOutputCount = count;
-                    }
-
-                    outputMatrix.Add(buffer);
-                }
-            }
         }
 
         void initLists()
